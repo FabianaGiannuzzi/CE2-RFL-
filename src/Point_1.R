@@ -31,3 +31,13 @@ page <- RCurl::getURL(url,
 writeLines(page, 
            con = here::here("Beppe_grillo_blog.html"))
 
+
+# POINT 3
+
+XML::getHTMLLinks("Beppe_grillo_blog.html")
+
+XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
+
+
+
+
