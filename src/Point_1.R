@@ -19,7 +19,7 @@ browseURL("http://www.beppegrillo.it/robots.txt")
 #"Allow: /wp-admin/admin-ajax.php" means that every robot is allowed to scrape "admin-ajax.php".
 
 # POINT 2 ------------------------------------------------------------------------------------------------------
-##Check out the following link: http://www.beppegrillo.it/un-mare-di- plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
+##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
         ## ???????? stop ("giannuzzifabianagemma@gmail.com")
 page <- RCurl::getURL(url, 
