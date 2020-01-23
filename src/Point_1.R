@@ -32,11 +32,21 @@ writeLines(page,
            con = here::here("Beppe_grillo_blog.html"))
 
 
-# POINT 3
+# POINT 3 --------------------------------------------------------------
+# Create a data frame with all the HTML links in the page using the XML::getHTMLLinks(). Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links). Finally, achieve the same result using rvest:: instead of XML.
+# ?????? XML::getHTMLLinks("Beppe_grillo_blog.html")
 
-XML::getHTMLLinks("Beppe_grillo_blog.html")
+links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
-XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
+filteredlinks <- str_subset(links, "^http://www.beppegrillo.it")
+
+
+dat <- tibble(
+  links = filteredlinks
+)
+dat
+
+
 
 
 
