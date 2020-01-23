@@ -19,7 +19,7 @@ browseURL("http://www.beppegrillo.it/robots.txt")
 #"Allow: /wp-admin/admin-ajax.php" means that every robot is allowed to scrape "admin-ajax.php".
 
 # POINT 2 ------------------------------------------------------------------------------------------------------
-##Check out the following link: http://www.beppegrillo.it/un-mare-di- plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
+##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
         ## ???????? stop ("giannuzzifabianagemma@gmail.com")
 page <- RCurl::getURL(url, 
@@ -53,6 +53,7 @@ links2
 
 filteredlinks2 <- str_subset(links2, "^http://www\\.beppegrillo\\.it")
 
+<<<<<<< HEAD
 dat2 <- tibble(
   links2 = filteredlinks2
 )
@@ -63,7 +64,17 @@ dat3 <- tibble(
   links2 = filteredlinks2
 )
 dat3
+=======
+links2 <- read_html(here::here("Beppe_grillo_blog.html")) %>% 
+  html_nodes(css = ".col.td-icon-search , .entry-crumbs , .entry-crumb , .entry-category a , .wp-image-1473 , .wp-image-1835 , .wp-image-24455 , .clearfix a , .td-related-right , .td-cur-simple-item , .footer-logo-wrap img , .wp-image-35165 , .td_module_wrap a , .td-post-next-prev-content , .wp-image-34954 , #menu-td-demo-top-menu a , #menu-principale-1 a , .td-pb-padding-side .entry-title , .td-retina-versionumn-1 a") %>% 
+  html_attr('href')
+links2
+>>>>>>> d741984775f6cb0a9d9e2bad79c95b8be1a62ec2
 
+dat2 <- tibble(
+  links2 = links2
+)
+dat2
 
 
 
