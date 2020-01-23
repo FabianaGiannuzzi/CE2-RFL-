@@ -7,7 +7,7 @@ library(tidyverse)
 ## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
 
 #Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
-url <- URLencode("http://www.beppegrillo.it/un-mare-diplastica-ci-sommergera/")
+url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
 #Inspecting the robot.txt to see what we are allowed to scrape. 
 browseURL("http://www.beppegrillo.it/robots.txt")
@@ -38,15 +38,31 @@ writeLines(page,
 
 links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
-filteredlinks <- str_subset(links, "^http://www.beppegrillo.it")
-
+filteredlinks <- str_subset(links, "^http://www\\.beppegrillo\\.it")
 
 dat <- tibble(
   links = filteredlinks
 )
 dat
 
+links2 <- read_html(here::here("Beppe_grillo_blog.html")) %>% 
+  html_nodes(css = "a") %>% 
+  html_attr("href")
 
+links2
+
+filteredlinks2 <- str_subset(links2, "^http://www\\.beppegrillo\\.it")
+
+dat2 <- tibble(
+  links2 = filteredlinks2
+)
+dat2
+
+dat3 <- tibble(
+  links = filteredlinks,
+  links2 = filteredlinks2
+)
+dat3
 
 
 
