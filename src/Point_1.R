@@ -66,14 +66,17 @@ dat3 <- tibble(
 dat3
 
 
-# POINT 4------------------------------------------------------------
-  
+# POINT 4-----------------------------------------------------------------------------------
+# Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page). How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use] 
+
+#Scraping the link "Prossimo articolo" 
 linkNEXTART <- read_html (here::here("Beppe_grillo_blog.html")) %>% 
   html_nodes (css = ".td-post-next-post a") %>% 
   html_attr ("href")
 
 linkNEXTART
 
+#Scraping the article 
 nextarticle <- read_html(linkNEXTART) %>% 
   html_nodes(css = "p") %>% 
   html_text()
