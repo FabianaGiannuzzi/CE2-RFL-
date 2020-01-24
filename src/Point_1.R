@@ -1,3 +1,7 @@
+# Source setup scripts:
+source(here::here("src","00_setup.R"))
+
+here::here("")
 library(RCurl)
 library(rvest)
 library(tidyverse)
