@@ -66,22 +66,18 @@ dat3 <- tibble(
 dat3
 
 
-# POINT 4 -------------------------------------------------------------------------------------
+# POINT 4------------------------------------------------------------
   
-prova <- read_html (here::here("Beppe_grillo_blog.html")) %>% 
+linkNEXTART <- read_html (here::here("Beppe_grillo_blog.html")) %>% 
   html_nodes (css = ".td-post-next-post a") %>% 
   html_attr ("href")
 
-prova
+linkNEXTART
 
-file_path <- str_c("prova")
-
-writeLines(page, 
-           con = file_path)
-
-nextarticle <- read_html(file_path) %>% 
+nextarticle <- read_html(linkNEXTART) %>% 
   html_nodes(css = "p") %>% 
   html_text()
+
 nextarticle
 
 
