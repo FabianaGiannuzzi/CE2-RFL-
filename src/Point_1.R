@@ -2,9 +2,7 @@
 source(here::here("src","00_setup.R"))
 
 here::here("")
-library(RCurl)
-library(rvest)
-library(tidyverse)
+
 
 # POINT 1 ----------------------------------------------------------------------------------------------------
 ## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
