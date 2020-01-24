@@ -69,7 +69,7 @@ dat3
 
 
 # POINT 4-----------------------------------------------------------------------------------
-# Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page). How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use] 
+# Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page). 
 
 #Scraping the link "Prossimo articolo" 
 linkNEXTART <- read_html (here::here("Beppe_grillo_blog.html")) %>% 
@@ -85,4 +85,16 @@ nextarticle <- read_html(linkNEXTART) %>%
 
 nextarticle
 
+#How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use] 
 
+#To repeat the same process for many links we should use the function *for loop* which allows us
+# to apply the same codes to many pages. To do that we have to follow some passages:
+# 1. We have to generate an output container, which means creating a vector specifying the mode  # and the length;
+# 2. There are two ways to index the links: the first way consists to index all the links directly # while a second and preferable way consists in using simple indices;
+# 3. We have then to create a folder in which all the pages can be stored with the function "dir.create" and specifying the name that we want to assign to the folder;
+# 4. At this point we can start working with the loop function:
+#     - the first step is specify the index;
+#     - cat()
+#     - Get the page and save it, providing our personal e-mail;
+#     - Parse the file and extract want we are interested to; 
+#     - Of course, we will use "sys.sleep(2)" to make this process less stressful for the program. 
