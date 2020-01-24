@@ -2,7 +2,7 @@
 source(here::here("src","00_setup.R"))
 
 here::here("")
-
+library("here")
 
 # POINT 1 ----------------------------------------------------------------------------------------------------
 ## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
@@ -27,7 +27,9 @@ page <- RCurl::getURL(url,
                useragent = str_c(R.version$platform,
                                  R.version$version.string,
                                  sep = ", "),
-               httpheader = c(From = "giannuzzifabianagemma@gmail.com")) 
+               httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
+
+
 
 writeLines(page, 
            con = here::here("Beppe_grillo_blog.html"))
@@ -105,15 +107,30 @@ nextarticle
 #POINT 5------------------------------------------------------------------------------------------------------------
 ##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
-url2 <- URLencode("http://www.beppegrillo.it/category/archivio/2016/.")
-browseURL(url2)
+url_2 <- URLencode("http://www.beppegrillo.it/category/archivio/2016")
+browseURL(url_2)
+url_2
 
-page2 <- RCurl::getURL(url2, 
+
+page2 <- RCurl::getURL(url_2, 
                       useragent = str_c(R.version$platform,
                                         R.version$version.string,
                                         sep = ", "),
                       httpheader = c(From = "riccardo.ruta@studenti.unimi.it")) 
 
+
+
 writeLines(page2, 
            con = here::here("Beppe_grillo_archivio_2016.html"))
 
+
+#For each of the 47 pages, get all the links and place them into a list (or character vector)
+
+link_archivio <- read_html(here::here("Beppe_grillo_archivio_2016.html")) %>%
+  html_nodes(css = ".current , .page-nav a") %>%
+  html_attr("href")
+
+
+link_archivio1 <- XML :: getHTMLLinks("http://www.beppegrillo.it/category/archivio/2016")
+
+archivio2016 <- vector(mode = "character")
