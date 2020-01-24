@@ -98,4 +98,22 @@ nextarticle
 #     - cat()
 #     - Get the page and save it, providing our personal e-mail;
 #     - Parse the file and extract want we are interested to; 
-#     - Of course, we will use "sys.sleep(2)" to make this process less stressful for the program. 
+#     - Of course, we will use "sys.sleep(2)" to make this process less stressful for the program.
+
+
+
+#POINT 5------------------------------------------------------------------------------------------------------------
+##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
+
+url2 <- URLencode("http://www.beppegrillo.it/category/archivio/2016/.")
+browseURL(url2)
+
+page2 <- RCurl::getURL(url2, 
+                      useragent = str_c(R.version$platform,
+                                        R.version$version.string,
+                                        sep = ", "),
+                      httpheader = c(From = "riccardo.ruta@studenti.unimi.it")) 
+
+writeLines(page2, 
+           con = here::here("Beppe_grillo_archivio_2016.html"))
+
