@@ -1,8 +1,12 @@
+#data access  CE_02
+#richi_fabi_ludo
+#2th tremester
+
 # Source setup scripts:
 source(here::here("src","00_setup.R"))
 
 here::here("")
-library("here")
+
 
 # POINT 1 ----------------------------------------------------------------------------------------------------
 ## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
@@ -22,7 +26,8 @@ browseURL("http://www.beppegrillo.it/robots.txt")
 # POINT 2 ------------------------------------------------------------------------------------------------------
 ##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
-        ## ???????? stop ("giannuzzifabianagemma@gmail.com")
+ 
+
 page <- RCurl::getURL(url, 
                useragent = str_c(R.version$platform,
                                  R.version$version.string,
@@ -49,6 +54,7 @@ dat <- tibble(
 dat
 
 # Finally, achieve the same result using rvest:: instead of XML.
+
 
 links2 <- read_html(here::here("Beppe_grillo_blog.html")) %>% 
   html_nodes(css = "a") %>% 
@@ -107,12 +113,12 @@ nextarticle
 #POINT 5------------------------------------------------------------------------------------------------------------
 ##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
-url_2 <- URLencode("http://www.beppegrillo.it/category/archivio/2016")
+url_2 <- URLencode("http://www.beppegrillo.it/category/archivio/2016/")
 browseURL(url_2)
 url_2
 
-
-page2 <- RCurl::getURL(url_2, 
+##ERROR HERE##------------------------
+page2 <- getURL(url_2, 
                       useragent = str_c(R.version$platform,
                                         R.version$version.string,
                                         sep = ", "),
