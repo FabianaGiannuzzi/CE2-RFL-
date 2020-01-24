@@ -33,8 +33,8 @@ writeLines(page,
 
 
 # POINT 3 --------------------------------------------------------------
-# Create a data frame with all the HTML links in the page using the XML::getHTMLLinks(). Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links). Finally, achieve the same result using rvest:: instead of XML.
-# ?????? XML::getHTMLLinks("Beppe_grillo_blog.html")
+# Create a data frame with all the HTML links in the page using the XML::getHTMLLinks().
+# Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).
 
 links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
@@ -44,6 +44,8 @@ dat <- tibble(
   links = filteredlinks)
 
 dat
+
+# Finally, achieve the same result using rvest:: instead of XML.
 
 links2 <- read_html(here::here("Beppe_grillo_blog.html")) %>% 
   html_nodes(css = "a") %>% 
@@ -58,7 +60,7 @@ dat2 <- tibble(
 )
 dat2
 
-#DATASET WITH BOTH 
+#Creating a dataset with both variables 
 dat3 <- tibble(
   links = filteredlinks,
   links2 = filteredlinks2
