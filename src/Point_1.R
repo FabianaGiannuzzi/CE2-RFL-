@@ -41,8 +41,8 @@ links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-som
 filteredlinks <- str_subset(links, "^http://www\\.beppegrillo\\.it")
 
 dat <- tibble(
-  links = filteredlinks
-)
+  links = filteredlinks)
+
 dat
 
 links2 <- read_html(here::here("Beppe_grillo_blog.html")) %>% 
@@ -66,5 +66,22 @@ dat3 <- tibble(
 dat3
 
 
+# POINT 4 -------------------------------------------------------------------------------------
+  
+prova <- read_html (here::here("Beppe_grillo_blog.html")) %>% 
+  html_nodes (css = ".td-post-next-post a") %>% 
+  html_attr ("href")
+
+prova
+
+file_path <- str_c("prova")
+
+writeLines(page, 
+           con = file_path)
+
+nextarticle <- read_html(file_path) %>% 
+  html_nodes(css = "p") %>% 
+  html_text()
+nextarticle
 
 
