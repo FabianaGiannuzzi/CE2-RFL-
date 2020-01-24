@@ -1,4 +1,3 @@
-install.packages("RCurl")
 library(RCurl)
 library(rvest)
 library(tidyverse)
