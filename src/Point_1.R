@@ -133,10 +133,17 @@ writeLines(page2,
 #For each of the 47 pages, get all the links and place them into a list (or character vector)
 
 link_archivio <- read_html(here::here("data/Beppe_grillo_archivio_2016.html")) %>%
-  html_nodes(css = ".current , .page-nav a") %>%
+  html_nodes(css = ".td_module_10 .td-module-title a , .last , .extend , .page , .current") %>%
   html_attr("href")
 
 link_archivio
 
+x <- read_html(link_archivio) %>% 
+  html_node(css = "p") %>% 
+  html_attr(href)
+
+filteredlink_archivio <- str_subset(link_archivio, "https://www.beppegrillo.it/category/archivio/2016/page")
+
+filteredlink_archivio
 
 link_archivio1 <- XML :: getHTMLLinks("http://www.beppegrillo.it/category/archivio/2016")
