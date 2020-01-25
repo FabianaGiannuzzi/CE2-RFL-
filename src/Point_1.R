@@ -37,7 +37,7 @@ page <- RCurl::getURL(url,
 
 
 writeLines(page, 
-           con = here::here("Beppe_grillo_blog.html"))
+           con = here::here("/data/Beppe_grillo_blog.html"))
 
 
 # POINT 3 --------------------------------------------------------------
@@ -56,7 +56,7 @@ dat
 # Finally, achieve the same result using rvest:: instead of XML.
 
 
-links2 <- read_html(here::here("Beppe_grillo_blog.html")) %>% 
+links2 <- read_html(here::here("data/Beppe_grillo_blog.html")) %>% 
   html_nodes(css = "a") %>% 
   html_attr("href")
 
@@ -81,7 +81,7 @@ dat3
 # Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page). 
 
 #Scraping the link "Prossimo articolo" 
-linkNEXTART <- read_html (here::here("Beppe_grillo_blog.html")) %>% 
+linkNEXTART <- read_html (here::here("data/Beppe_grillo_blog.html")) %>% 
   html_nodes (css = ".td-post-next-post a") %>% 
   html_attr ("href")
 
@@ -113,11 +113,11 @@ nextarticle
 #POINT 5------------------------------------------------------------------------------------------------------------
 ##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
-url_2 <- URLencode("http://www.beppegrillo.it/category/archivio/2016/")
+url_2 <- URLencode("https://www.beppegrillo.it/category/archivio/2016/")
 browseURL(url_2)
 url_2
 
-##ERROR HERE##------------------------
+
 page2 <- getURL(url_2, 
                       useragent = str_c(R.version$platform,
                                         R.version$version.string,
@@ -127,16 +127,16 @@ page2 <- getURL(url_2,
 
 
 writeLines(page2, 
-           con = here::here("Beppe_grillo_archivio_2016.html"))
+           con = here::here("data/Beppe_grillo_archivio_2016.html"))
 
 
 #For each of the 47 pages, get all the links and place them into a list (or character vector)
 
-link_archivio <- read_html(here::here("Beppe_grillo_archivio_2016.html")) %>%
+link_archivio <- read_html(here::here("data/Beppe_grillo_archivio_2016.html")) %>%
   html_nodes(css = ".current , .page-nav a") %>%
   html_attr("href")
 
+link_archivio
+
 
 link_archivio1 <- XML :: getHTMLLinks("http://www.beppegrillo.it/category/archivio/2016")
-
-archivio2016 <- vector(mode = "character")
