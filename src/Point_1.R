@@ -26,8 +26,6 @@ browseURL("http://www.beppegrillo.it/robots.txt")
 # POINT 2 ------------------------------------------------------------------------------------------------------
 ##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
- 
-
 page <- RCurl::getURL(url, 
                useragent = str_c(R.version$platform,
                                  R.version$version.string,
@@ -54,7 +52,6 @@ dat <- tibble(
 dat
 
 # Finally, achieve the same result using rvest:: instead of XML.
-
 
 links2 <- read_html(here::here("data/Beppe_grillo_blog.html")) %>% 
   html_nodes(css = "a") %>% 
@@ -132,18 +129,65 @@ writeLines(page2,
 
 #For each of the 47 pages, get all the links and place them into a list (or character vector)
 
+link_archivio <- lapply(paste0("http://www.beppegrillo.it/category/archivio/2016/page", 1:47),
+                        function(url_2){
+                        url_2 %>% read_html() %>%
+                        html_nodes(".last+ a")
+                        html_attr("href")
+                        })
+
+link_archivio
+
+
+# I want to create a folder where to store all the pages:
 link_archivio <- read_html(here::here("data/Beppe_grillo_archivio_2016.html")) %>%
-  html_nodes(css = ".td_module_10 .td-module-title a , .last , .extend , .page , .current") %>%
+  html_nodes(css = ".last+ a") %>%
   html_attr("href")
 
 link_archivio
 
-x <- read_html(link_archivio) %>% 
-  html_node(css = "p") %>% 
-  html_attr(href)
+----
+
+dir.create("archivio2016_pages")
+
+for (i in 1:47) {
+  
+  cat("Iteration:", i, ". Scraping:", link_archivio[i],"\n")
+  
+  # Get the page
+  page3 <- getURL(link_archivio[i], 
+                 useragent = str_c(R.version$platform,
+                                   R.version$version.string,
+                                   sep = ", "),
+                 httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
+  
+  # Save the page:
+  file_path <- here::here("archivio2016_pages", str_c("archivio2016_", i, ".html"))
+  writeLines(page3, 
+             con = file_path)
+  
+  # Parse and extract:
+    link_archivio<- read_html(file_path) %>% 
+    html_nodes(css = ".last+ a") %>% 
+    html_attr(href)
+  
+  # Rest!
+  Sys.sleep(2)
+}
+
+
+link_archivio <- read_html(here::here("data/Beppe_grillo_archivio_2016.html")) %>%
+  html_nodes(css = ".last+ a") %>%
+  html_attr("href")
+
+link_archivio
+
+-----
 
 filteredlink_archivio <- str_subset(link_archivio, "https://www.beppegrillo.it/category/archivio/2016/page")
 
 filteredlink_archivio
 
-link_archivio1 <- XML :: getHTMLLinks("http://www.beppegrillo.it/category/archivio/2016")
+-----
+
+link_archivio1 <- XML :: getHTMLLinks("https://www.beppegrillo.it/category/archivio/2016/")
