@@ -100,7 +100,7 @@ nextarticle
 # 3. We have then to create a folder in which all the pages can be stored with the function "dir.create" and specifying the name that we want to assign to the folder;
 # 4. At this point we can start working with the loop function:
 #     - the first step is specify the index;
-#     - cat()
+#     - Then we print the outputs with cat()
 #     - Get the page and save it, providing our personal e-mail;
 #     - Parse the file and extract want we are interested to; 
 #     - Of course, we will use "sys.sleep(2)" to make this process less stressful for the program.
@@ -108,13 +108,18 @@ nextarticle
 
 
 #POINT 5------------------------------------------------------------------------------------------------------------
-##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
+##Check out the following link: http://www.beppegrillo.it/category/archivio/2016/ . It contains the entire blog for 2016. There are 47 pages of entries. Scrape all the posts for 2016 following this strategy:
+##a)For each of the 47 pages, get all the links and place them into a list (or character vector)
+##b)For each link, download the files and sys.sleep() for few seconds
+##c)For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.
 
+
+#Browsing the page 
 url_2 <- URLencode("https://www.beppegrillo.it/category/archivio/2016/")
 browseURL(url_2)
 url_2
 
-
+#Downloading the page while specifying our browser and providing our email
 page2 <- getURL(url_2, 
                       useragent = str_c(R.version$platform,
                                         R.version$version.string,
@@ -122,13 +127,11 @@ page2 <- getURL(url_2,
                       httpheader = c(From = "riccardo.ruta@studenti.unimi.it")) 
 
 
-
+#Saving the page 
 writeLines(page2, 
            con = here::here("data/Beppe_grillo_archivio_2016.html"))
 
-
-#For each of the 47 pages, get all the links and place them into a list (or character vector)
-
+#Creating an object to grab all the links from the 47 pages
 link_archivio <- lapply(paste0("https://www.beppegrillo.it/category/archivio/2016/page/", 1:47),
                         function(url){
                           url_2 %>% read_html() %>% 
@@ -140,34 +143,36 @@ link_archivio <- unlist(link_archivio)
 
 #LOOP:
 
-# I want to create a folder where to store all the pages:
+#Creating a folder where to store all the pages:
 dir.create("data/archivio_2016")
 
-LINKS3 <- vector(mode = "list", length = length(link_archivio))
+#Specifying lenght and mode of the vector
+articoli_archivio_2016 <- vector(mode = "list", length = length(link_archivio))
 
-for (i in 226:length(link_archivio)) {
+#Applying the for loop function to get all the links and their texts from the 47 pages of the 2016 archivio.
+for (i in 1:length(link_archivio)) {
   
   cat("Iteration:", i, ". Scraping:", link_archivio[i],"\n")
   
-  # Get the page
+  #Getting the page
   page3 <- RCurl::getURL(link_archivio[i], 
                         useragent = str_c(R.version$platform,
                                           R.version$version.string,
                                           sep = ", "),
                         httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
   
-  # Save the page:
+  #Saving the page:
   file_path_1 <- here::here("data/archivio_2016", str_c("archivio_", i, ".html"))
   writeLines(page3, 
              con = file_path_1)
   
-  # Parse and extract:
-  LINKS3[[i]] <- read_html(file_path_1) %>% 
+  #Parsing and extracting
+  articoli_archivio_2016[[i]] <- read_html(file_path_1) %>% 
     html_nodes("p") %>% 
     html_text()
   
-  # Rest!
+  #Setting the amount of time in which the code rests.
   Sys.sleep(2)
 } 
 
-LINKS3
+articoli_archivio_2016
