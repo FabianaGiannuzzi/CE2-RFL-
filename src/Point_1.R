@@ -100,7 +100,7 @@ nextarticle
 # 3. We have then to create a folder in which all the pages can be stored with the function "dir.create" and specifying the name that we want to assign to the folder;
 # 4. At this point we can start working with the loop function:
 #     - the first step is specify the index;
-#     - cat()
+#     - Then we print the outputs with cat()
 #     - Get the page and save it, providing our personal e-mail;
 #     - Parse the file and extract want we are interested to; 
 #     - Of course, we will use "sys.sleep(2)" to make this process less stressful for the program.
