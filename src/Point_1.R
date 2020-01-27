@@ -145,7 +145,7 @@ dir.create("data/archivio_2016")
 
 LINKS3 <- vector(mode = "list", length = length(link_archivio))
 
-for (i in 226:length(link_archivio)) {
+for (i in 1:length(link_archivio)) {
   
   cat("Iteration:", i, ". Scraping:", link_archivio[i],"\n")
   
