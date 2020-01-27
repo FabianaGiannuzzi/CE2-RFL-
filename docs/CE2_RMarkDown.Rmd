@@ -1,6 +1,6 @@
 ---
 title: "CE2-RFL"
-author: "Riccardo Ruta, Fabiana Giannuzzi, Anna Ludovica Vinelli"
+author: "Riccardo Ruta, Fabiana Gemma Giannuzzi, Anna Ludovica Vinelli"
 date: "27/1/2020"
 output: 
   html_document:
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 # **CLASS EXERCISE 2** 
 
-## SETUP
+#### SETUP
 ```{r, echo = F}
 # Source setup scripts:
 source(here::here("src","00_setup.R"))
@@ -27,7 +27,7 @@ here::here("")
 
 ## **Point 1**
 
-### *Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?*
+#### *Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?*
 
 ```{r}
 #Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
@@ -47,7 +47,7 @@ We obtained:
 
 ## **Point 2**
 
-### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
+#### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
 
 ```{r}
 
@@ -67,13 +67,13 @@ writeLines(page,
 
 ## **Point 3**
 
-### *Create a data frame with all the HTML links in the page using the XML::getHTMLLinks(). Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).*
+#### *Create a data frame with all the HTML links in the page using the XML::getHTMLLinks(). Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).*
 
 ```{r, results = 'hide'}
-##Getting all the links
+#Getting all the links
 links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
-##Filtering the links to keep only those from the blog
+#Filtering the links to keep only those from the blog
 filteredlinks <- str_subset(links, "^http://www\\.beppegrillo\\.it")
 
 dat <- tibble(
@@ -111,7 +111,7 @@ dat3
 
 ## **Point 4**
 
-### *Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page).* 
+#### *Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page).* 
 
 ```{r, results = 'hide'}
 #Scraping the link "Prossimo articolo" 
@@ -140,7 +140,7 @@ nextarticle
 ```
 
 
-### *How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use]* 
+#### *How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use]* 
 
 To repeat the same process for many links we should use the function **for loop** which allows us to apply the same codes to many pages. To do that we have to follow some passages:
 
@@ -164,9 +164,9 @@ To repeat the same process for many links we should use the function **for loop*
 
 ## **Point 5**
 
-### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
+#### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
 
-#### *a) For each of the 47 pages, get all the links and place them into a list (or character vector);*
+#### *a) For each of the 47 pages, get all the links and place them into a list (or character vector)*
 
 ```{r, results = 'hide'}
 #Browsing the page 
@@ -199,9 +199,9 @@ link_archivio <- unlist(link_archivio)
 ```
 
 
-#### b) For each link, download the files and sys.sleep() for few seconds;
+#### *b) For each link, download the files and sys.sleep() for few seconds*
 
-```{r}
+```{r, eval = F}
 #Creating a folder where to store all the pages:
 dir.create("data/archivio_2016")
 
@@ -235,10 +235,12 @@ for (i in 1:length(link_archivio)) {
 } 
 
 articoli_archivio_2016
+
+
 ```
 
 
-#### c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text. 
+#### *c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.*
 
 If a page contains no text we expect the iteration to stop and print an error and then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had so that it can continue from there.
 A way to make the code reproducible is to use the if else condition so that you don't have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.
@@ -246,7 +248,7 @@ A way to make the code reproducible is to use the if else condition so that you 
 
 ## **Point 6**
 
-### *Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.*
+#### *Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.*
 
 According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used to retrieve and collect data from the web. They browse and download web pages in an automated way.
 They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.
