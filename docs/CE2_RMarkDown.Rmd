@@ -1,0 +1,29 @@
+---
+title: "CE2-RFL"
+author: "Riccardo Ruta, Fabiana Giannuzzi, Anna Ludovica Vinelli"
+date: "27/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Point 1
+
+### Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
+```{r}
+#Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
+url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
+
+#Inspecting the robot.txt to see what we are allowed to scrape. 
+browseURL("http://www.beppegrillo.it/robots.txt")
+```
+
+###Comment
+
+We obtained "User-agent: \*". The user-agent refers to the robots to whom the Disallow and Allow codes apply. In this case the "*" refers to every robot.
+"Disallow: /wp-admin/" means that every robot is excluded from this specific part of the server.
+"Allow: /wp-admin/admin-ajax.php" means that every robot is allowed to scrape "admin-ajax.php".
+
+###Point 2
