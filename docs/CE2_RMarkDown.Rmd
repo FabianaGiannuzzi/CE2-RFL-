@@ -152,10 +152,7 @@ page2 <- getURL(url_2,
 writeLines(page2, 
            con = here::here("data/Beppe_grillo_archivio_2016.html"))
 
-```
-
-###For each of the 47 pages, get all the links and place them into a list (or character vector)
-```{r}
+#Creating an object to grab all the links from the 47 pages
 link_archivio <- lapply(paste0("http://www.beppegrillo.it/category/archivio/2016/page", 1:47),
                         function(url_2){
                         url_2 %>% read_html() %>%
