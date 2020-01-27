@@ -9,7 +9,7 @@ here::here("")
 
 
 # POINT 1 ----------------------------------------------------------------------------------------------------
-## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
+## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?
 
 #Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
 url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
@@ -26,6 +26,7 @@ browseURL("http://www.beppegrillo.it/robots.txt")
 # POINT 2 ------------------------------------------------------------------------------------------------------
 ##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
+##Downloading the file
 page <- RCurl::getURL(url, 
                useragent = str_c(R.version$platform,
                                  R.version$version.string,
@@ -33,7 +34,7 @@ page <- RCurl::getURL(url,
                httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
 
 
-
+#Saving the page
 writeLines(page, 
            con = here::here("/data/Beppe_grillo_blog.html"))
 
@@ -42,8 +43,10 @@ writeLines(page,
 # Create a data frame with all the HTML links in the page using the XML::getHTMLLinks().
 # Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).
 
+##Getting all the links
 links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
+##Filtering the links to keep only those from the blog
 filteredlinks <- str_subset(links, "^http://www\\.beppegrillo\\.it")
 
 dat <- tibble(
@@ -51,7 +54,7 @@ dat <- tibble(
 
 dat
 
-# Finally, achieve the same result using rvest:: instead of XML.
+#Using rvest:: instead of XML.
 
 links2 <- read_html(here::here("data/Beppe_grillo_blog.html")) %>% 
   html_nodes(css = "a") %>% 
@@ -66,7 +69,7 @@ dat2 <- tibble(
 )
 dat2
 
-#Creating a dataset with both variables 
+#Creating a dataset with both variables to check them easily
 dat3 <- tibble(
   links = filteredlinks,
   links2 = filteredlinks2
@@ -176,3 +179,35 @@ for (i in 1:length(link_archivio)) {
 } 
 
 articoli_archivio_2016
+
+##c) If a page contains no text we expect the iteration to stop and print an error and then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had so that it can continue from there.
+## A way to make the code reproducible is to use the if else condition so that you don't have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.
+
+#POINT 6 -----------------------------------------------------------------------------
+#Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? 
+#Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.
+
+## According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used to retrieve and collect data from the web. They browse and download web pages in an automated way.
+## They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.
+## A web spider is a web crawler and it  can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format.
+##Our simple scrape script does not provide the same function of  crawling, because they can only parse and extract contents from URLs, which the user must collect and provide manually. Therefore, they are not able to traverse web pages, collecting links and data automatically.
+##The main difference is that our script “scraper” is able to download all the data, only from a single web-page, while a crawler made the same things from a lot of pages on internet.
+##A typical web spider is the script of google that scrape all the internet domain and save all the web link in a hierarchical list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
