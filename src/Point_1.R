@@ -172,7 +172,7 @@ for (i in 1:length(link_archivio)) {
     html_text()
   
   #Setting the amount of time in which the code rests.
-  Sys.sleep(2)
+  Sys.sleep(2) 
 } 
 
 articoli_archivio_2016
