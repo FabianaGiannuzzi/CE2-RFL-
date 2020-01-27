@@ -176,3 +176,28 @@ for (i in 1:length(link_archivio)) {
 } 
 
 articoli_archivio_2016
+
+#POINT 6 -----------------------------------------------------------------------------
+#Check out the RCrawler package and its accompanying paper. What does it me an to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? 
+#Inspect the package documentation and sketch how you could bui ld a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
