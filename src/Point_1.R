@@ -9,7 +9,7 @@ here::here("")
 
 
 # POINT 1 ----------------------------------------------------------------------------------------------------
-## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
+## Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?
 
 #Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
 url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
@@ -26,6 +26,7 @@ browseURL("http://www.beppegrillo.it/robots.txt")
 # POINT 2 ------------------------------------------------------------------------------------------------------
 ##Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
+##Downloading the file
 page <- RCurl::getURL(url, 
                useragent = str_c(R.version$platform,
                                  R.version$version.string,
@@ -33,7 +34,7 @@ page <- RCurl::getURL(url,
                httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
 
 
-
+#Saving the page
 writeLines(page, 
            con = here::here("/data/Beppe_grillo_blog.html"))
 
@@ -191,7 +192,7 @@ articoli_archivio_2016
 ##The main difference is that our script “scraper” is able to download all the data, only from a single web-page, while a crawler made the same things from a lot of pages on internet.
 ##A typical web spider is the script of google that scrape all the internet domain and save all the web link in a hierarchical list.
 
-
+##
 
 
 

@@ -23,7 +23,7 @@ here::here("")
 
 ##Point 1
 
-###Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / di sallow statements and the definition of user-agent. What do these lines mean?
+###Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?
 ```{r}
 #Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
 url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
@@ -42,6 +42,8 @@ We obtained "User-agent: \*". The user-agent refers to the robots to whom the Di
 ###Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
 ```{r}
+
+#Downloading the file
 page <- RCurl::getURL(url, 
                useragent = str_c(R.version$platform,
                                  R.version$version.string,
@@ -49,7 +51,7 @@ page <- RCurl::getURL(url,
                httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
 
 
-
+#Saving the page
 writeLines(page, 
            con = here::here("/data/Beppe_grillo_blog.html"))
 
