@@ -194,8 +194,6 @@ articoli_archivio_2016
 ##The main difference is that our script “scraper” is able to download all the data, only from a single web-page, while a crawler made the same things from a lot of pages on internet.
 ##A typical web spider is the script of google that scrape all the internet domain and save all the web link in a hierarchical list.
 
-##
-
 
 
 
