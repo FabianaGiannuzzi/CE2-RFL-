@@ -177,11 +177,19 @@ for (i in 1:length(link_archivio)) {
 
 articoli_archivio_2016
 
+##c) If a page contains no text we expect the iteration to stop and print an error and then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had so that it can continue from there.
+## A way to make the code reproducible is to use the if else condition so that you don't have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.
+
 #POINT 6 -----------------------------------------------------------------------------
-#Check out the RCrawler package and its accompanying paper. What does it me an to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? 
+#Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? 
 #Inspect the package documentation and sketch how you could bui ld a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.
 
 ## According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used to retrieve and collect data from the web. They browse and download web pages in an automated way.
+## They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.
+## A web spider is a web crawler and it  can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format.
+##Our simple scrape script does not provide the same function of  crawling, because they can only parse and extract contents from URLs, which the user must collect and provide manually. Therefore, they are not able to traverse web pages, collecting links and data automatically.
+##The main difference is that our script “scraper” is able to download all the data, only from a single web-page, while a crawler made the same things from a lot of pages on internet.
+##A typical web spider is the script of google that scrape all the internet domain and save all the web link in a hierarchical list.
 
 
 
