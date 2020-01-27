@@ -94,9 +94,9 @@ nextarticle
 #How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use] 
 
 #To repeat the same process for many links we should use the function *for loop* which allows us
-# to apply the same codes to many pages. To do that we have to follow some passages:
-# 1. We have to generate an output container, which means creating a vector specifying the mode  # and the length;
-# 2. There are two ways to index the links: the first way consists to index all the links directly # while a second and preferable way consists in using simple indices;
+# to apply the same codes to many pages. To do that we have to follow some steps:
+# 1. We have to generate an output container, which means creating a vector specifying the mode and the length;
+# 2. There are two ways to index the links: the first way consists to index all the links directly while a second and preferable way consists in using simple indices;
 # 3. We have then to create a folder in which all the pages can be stored with the function "dir.create" and specifying the name that we want to assign to the folder;
 # 4. At this point we can start working with the loop function:
 #     - the first step is specify the index;
@@ -129,65 +129,45 @@ writeLines(page2,
 
 #For each of the 47 pages, get all the links and place them into a list (or character vector)
 
-link_archivio <- lapply(paste0("http://www.beppegrillo.it/category/archivio/2016/page", 1:47),
-                        function(url_2){
-                        url_2 %>% read_html() %>%
-                        html_nodes(".last+ a")
-                        html_attr("href")
+link_archivio <- lapply(paste0("https://www.beppegrillo.it/category/archivio/2016/page/", 1:47),
+                        function(url){
+                          url_2 %>% read_html() %>% 
+                            html_nodes(".td_module_10 .td-module-title a") %>% 
+                            html_attr("href") 
                         })
 
-link_archivio
+link_archivio <- unlist(link_archivio)
 
+#LOOP:
 
 # I want to create a folder where to store all the pages:
-link_archivio <- read_html(here::here("data/Beppe_grillo_archivio_2016.html")) %>%
-  html_nodes(css = ".last+ a") %>%
-  html_attr("href")
+dir.create("data/archivio_2016")
 
-link_archivio
+LINKS3 <- vector(mode = "list", length = length(link_archivio))
 
-----
-
-dir.create("archivio2016_pages")
-
-for (i in 1:47) {
+for (i in 226:length(link_archivio)) {
   
   cat("Iteration:", i, ". Scraping:", link_archivio[i],"\n")
   
   # Get the page
-  page3 <- getURL(link_archivio[i], 
-                 useragent = str_c(R.version$platform,
-                                   R.version$version.string,
-                                   sep = ", "),
-                 httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
+  page3 <- RCurl::getURL(link_archivio[i], 
+                        useragent = str_c(R.version$platform,
+                                          R.version$version.string,
+                                          sep = ", "),
+                        httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
   
   # Save the page:
-  file_path <- here::here("archivio2016_pages", str_c("archivio2016_", i, ".html"))
+  file_path_1 <- here::here("data/archivio_2016", str_c("archivio_", i, ".html"))
   writeLines(page3, 
-             con = file_path)
+             con = file_path_1)
   
   # Parse and extract:
-    link_archivio<- read_html(file_path) %>% 
-    html_nodes(css = ".last+ a") %>% 
-    html_attr(href)
+  LINKS3[[i]] <- read_html(file_path_1) %>% 
+    html_nodes("p") %>% 
+    html_text()
   
   # Rest!
   Sys.sleep(2)
-}
+} 
 
-
-link_archivio <- read_html(here::here("data/Beppe_grillo_archivio_2016.html")) %>%
-  html_nodes(css = ".last+ a") %>%
-  html_attr("href")
-
-link_archivio
-
------
-
-filteredlink_archivio <- str_subset(link_archivio, "https://www.beppegrillo.it/category/archivio/2016/page")
-
-filteredlink_archivio
-
------
-
-link_archivio1 <- XML :: getHTMLLinks("https://www.beppegrillo.it/category/archivio/2016/")
+LINKS3
