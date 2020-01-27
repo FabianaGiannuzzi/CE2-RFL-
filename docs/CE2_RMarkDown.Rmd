@@ -97,7 +97,7 @@ dat3
 
 ```
 
-##point 4
+##Point 4
 ###Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page). 
 
 ```{r}
@@ -125,7 +125,7 @@ To repeat the same process for many links we should use the function *for loop* 
  3. We have then to create a folder in which all the pages can be stored with the function "dir.create" and specifying the name that we want to assign to the folder;
  4. At this point we can start working with the loop function:
      - the first step is specify the index;
-     - cat()
+     - Then we print the outputs with cat()
      - Get the page and save it, providing our personal e-mail;
      - Parse the file and extract want we are interested to; 
      - Of course, we will use "sys.sleep(2)" to make this process less stressful for the program.
@@ -135,11 +135,12 @@ To repeat the same process for many links we should use the function *for loop* 
 ###Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
 
 ```{r}
+#Browsing the page 
 url_2 <- URLencode("https://www.beppegrillo.it/category/archivio/2016/")
 browseURL(url_2)
 url_2
 
-
+#Downloading the page while specifying our browser and providing our email
 page2 <- getURL(url_2, 
                       useragent = str_c(R.version$platform,
                                         R.version$version.string,
@@ -147,7 +148,7 @@ page2 <- getURL(url_2,
                       httpheader = c(From = "riccardo.ruta@studenti.unimi.it")) 
 
 
-
+#Saving the page 
 writeLines(page2, 
            con = here::here("data/Beppe_grillo_archivio_2016.html"))
 
