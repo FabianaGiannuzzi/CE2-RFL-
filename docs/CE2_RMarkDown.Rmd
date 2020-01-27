@@ -2,15 +2,22 @@
 title: "CE2-RFL"
 author: "Riccardo Ruta, Fabiana Giannuzzi, Anna Ludovica Vinelli"
 date: "27/1/2020"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    theme: spacelab
+    highlight: pygments
+    fig_width: 10
+    fig_height: 8
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# **CLASS EXERCISE 2** 
 
-##SETUP
-```{r}
+## SETUP
+```{r, echo = F}
 # Source setup scripts:
 source(here::here("src","00_setup.R"))
 
@@ -18,12 +25,10 @@ here::here("")
 
 ```
 
+## **Point 1**
 
+### *Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?*
 
-
-##Point 1
-
-###Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?
 ```{r}
 #Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
 url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
@@ -32,14 +37,17 @@ url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 browseURL("http://www.beppegrillo.it/robots.txt")
 ```
 
-###Comment
+We obtained:
 
-We obtained "User-agent: \*". The user-agent refers to the robots to whom the Disallow and Allow codes apply. In this case the "*" refers to every robot.
-"Disallow: /wp-admin/" means that every robot is excluded from this specific part of the server.
-"Allow: /wp-admin/admin-ajax.php" means that every robot is allowed to scrape "admin-ajax.php".
+- *"User-agent: \*".* The user-agent refers to the robots to whom the Disallow and Allow codes apply. In this case the "*" refers to every robot.
 
-##Point 2
-###Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
+- *"Disallow: /wp-admin/"*, which means that every robot is excluded from this specific part of the server.
+
+- *"Allow: /wp-admin/admin-ajax.php"*, which means that every robot is allowed to scrape "admin-ajax.php".
+
+## **Point 2**
+
+### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
 
 ```{r}
 
@@ -57,11 +65,11 @@ writeLines(page,
 
 ```
 
-##Point 3
-###Create a data frame with all the HTML links in the page using the XML::getHTMLLinks().
-###Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).
+## **Point 3**
 
-```{r}
+### *Create a data frame with all the HTML links in the page using the XML::getHTMLLinks(). Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).*
+
+```{r, results = 'hide'}
 ##Getting all the links
 links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
@@ -88,19 +96,24 @@ dat2 <- tibble(
 )
 dat2
 
+```
+To show that we obtained the same links using the two different methods, we created a dataset with the two variables created
+
+```{r}
 #Creating a dataset with both variables to check them easily
 dat3 <- tibble(
   links = filteredlinks,
   links2 = filteredlinks2
 )
 dat3
-
 ```
 
-##Point 4
-###Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page). 
 
-```{r}
+## **Point 4**
+
+### *Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page).* 
+
+```{r, results = 'hide'}
 #Scraping the link "Prossimo articolo" 
 linkNEXTART <- read_html (here::here("data/Beppe_grillo_blog.html")) %>% 
   html_nodes (css = ".td-post-next-post a") %>% 
@@ -116,25 +129,46 @@ nextarticle <- read_html(linkNEXTART) %>%
 nextarticle
 ```
 
-###How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use] 
+This way, we obtained the **text of the article**: 
 
-To repeat the same process for many links we should use the function *for loop* which allows us
- to apply the same codes to many pages. To do that we have to follow some passages:
- 1. We have to generate an output container, which means creating a vector specifying the mode  # and the length;
- 2. There are two ways to index the links: the first way consists to index all the links directly # while a second and preferable way consists in using simple indices;
- 3. We have then to create a folder in which all the pages can be stored with the function "dir.create" and specifying the name that we want to assign to the folder;
- 4. At this point we can start working with the loop function:
+```{r, echo = F}
+nextarticle <- read_html(linkNEXTART) %>% 
+  html_nodes(css = "p") %>% 
+  html_text()
+
+nextarticle
+```
+
+
+### *How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use]* 
+
+To repeat the same process for many links we should use the function **for loop** which allows us to apply the same codes to many pages. To do that we have to follow some passages:
+
+ 1. We have to generate an output container, which means *creating a vector* specifying the mode and the length;
+ 
+ 2. We have to index the links. There are two ways to achieve this task: the first way consists to index all the links directly while a second and preferable way consists in using simple indices;
+ 
+ 3. We have then to create a folder in which all the pages can be stored with the function *"dir.create"* and specifying the name that we want to assign to the folder;
+ 
+ 4. At this point we can start working with the *loop function*:
+ 
      - the first step is specify the index;
-     - Then we print the outputs with cat()
+     
+     - Then we print the outputs with *cat()*;
+     
      - Get the page and save it, providing our personal e-mail;
+     
      - Parse the file and extract want we are interested to; 
-     - Of course, we will use "sys.sleep(2)" to make this process less stressful for the program.
+     
+     - Of course, we will use *"sys.sleep(2)"* to make this process less stressful for the program.
 
-##Point 5
+## **Point 5**
 
-###Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.
+### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
 
-```{r}
+#### *a) For each of the 47 pages, get all the links and place them into a list (or character vector);*
+
+```{r, results = 'hide'}
 #Browsing the page 
 url_2 <- URLencode("https://www.beppegrillo.it/category/archivio/2016/")
 browseURL(url_2)
@@ -152,25 +186,20 @@ page2 <- getURL(url_2,
 writeLines(page2, 
            con = here::here("data/Beppe_grillo_archivio_2016.html"))
 
-<<<<<<< HEAD
-```
-
-###For each of the 47 pages, get all the links and place them into a list (or character vector)
-
-=======
 #Creating an object to grab all the links from the 47 pages
-link_archivio <- lapply(paste0("http://www.beppegrillo.it/category/archivio/2016/page", 1:47),
-                        function(url_2){
-                        url_2 %>% read_html() %>%
-                        html_nodes(".last+ a")
-                        html_attr("href")
+link_archivio <- lapply(paste0("https://www.beppegrillo.it/category/archivio/2016/page/", 1:47),
+                        function(url){
+                          url_2 %>% read_html() %>% 
+                            html_nodes(".td_module_10 .td-module-title a") %>% 
+                            html_attr("href") 
                         })
 
-link_archivio
-```
->>>>>>> 7a46f9a3dbc4e5f83f60bca86fde450c54d72128
+link_archivio <- unlist(link_archivio)
 
-##LOOP
+```
+
+
+#### b) For each link, download the files and sys.sleep() for few seconds;
 
 ```{r}
 #Creating a folder where to store all the pages:
@@ -202,16 +231,22 @@ for (i in 1:length(link_archivio)) {
     html_text()
   
   #Setting the amount of time in which the code rests.
-  Sys.sleep(2)
+  Sys.sleep(2) 
 } 
 
 articoli_archivio_2016
 ```
-c) If a page contains no text we expect the iteration to stop and print an error and then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had so that it can continue from there.
+
+
+#### c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text. 
+
+If a page contains no text we expect the iteration to stop and print an error and then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had so that it can continue from there.
 A way to make the code reproducible is to use the if else condition so that you don't have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.
 
-##Point 6
-###Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.
+
+## **Point 6**
+
+### *Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.*
 
 According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used to retrieve and collect data from the web. They browse and download web pages in an automated way.
 They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.
