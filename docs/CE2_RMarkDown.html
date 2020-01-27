@@ -552,7 +552,7 @@ summary {
 <a class="sourceLine" id="cb13-23" title="23">  <span class="dt">links2 =</span> filteredlinks2</a>
 <a class="sourceLine" id="cb13-24" title="24">)</a>
 <a class="sourceLine" id="cb13-25" title="25">dat2</a></code></pre></div>
-<p>To show that we obtained the same links using the two different methods, we created a dataset with the two variables created</p>
+<p>To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co">#Creating a dataset with both variables to check them easily</span></a>
 <a class="sourceLine" id="cb14-2" title="2">dat3 &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
 <a class="sourceLine" id="cb14-3" title="3">  <span class="dt">links =</span> filteredlinks,</a>
@@ -662,6 +662,9 @@ summary {
 </div>
 <div id="b-for-each-link-download-the-files-and-sys.sleep-for-few-seconds" class="section level4">
 <h4><em>b) For each link, download the files and sys.sleep() for few seconds</em></h4>
+</div>
+<div id="c-for-each-downloaded-page-scrape-the-main-text.-ask-yourself-what-happens-if-a-page-contains-no-text." class="section level4">
+<h4><em>c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.</em></h4>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co">#Creating a folder where to store all the pages:</span></a>
 <a class="sourceLine" id="cb19-2" title="2"><span class="kw">dir.create</span>(<span class="st">&quot;data/archivio_2016&quot;</span>)</a>
 <a class="sourceLine" id="cb19-3" title="3"></a>
@@ -695,17 +698,16 @@ summary {
 <a class="sourceLine" id="cb19-31" title="31">} </a>
 <a class="sourceLine" id="cb19-32" title="32"></a>
 <a class="sourceLine" id="cb19-33" title="33">articoli_archivio_<span class="dv">2016</span></a></code></pre></div>
-</div>
-<div id="c-for-each-downloaded-page-scrape-the-main-text.-ask-yourself-what-happens-if-a-page-contains-no-text." class="section level4">
-<h4><em>c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.</em></h4>
-<p>If a page contains no text we expect the iteration to stop and print an error and then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had so that it can continue from there. A way to make the code reproducible is to use the if else condition so that you don’t have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.</p>
+<p><strong>If a page contains no text</strong> we expect the iteration to stop and print an error. Then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had. This way it can continue from there. A way to make the code reproducible is to use the <em>if else condition</em> so that you don’t have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.</p>
 </div>
 </div>
 <div id="point-6" class="section level2">
 <h2><strong>Point 6</strong></h2>
 <div id="check-out-the-rcrawler-package-and-its-accompanying-paper.-what-does-it-mean-to-crawl-and-what-is-it-a-web-spider-how-is-this-different-from-a-scraper-you-have-built-at-point-5-inspect-the-package-documentation-and-sketch-how-you-could-build-a-spider-scraper-which-functions-should-you-use-with-which-arguments-dont-do-it-just-sketch-and-explain." class="section level4">
 <h4><em>Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don’t do it, just sketch and explain.</em></h4>
-<p>According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used to retrieve and collect data from the web. They browse and download web pages in an automated way. They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus. A web spider is a web crawler and it can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format. Our simple scrape script does not provide the same function of crawling, because they can only parse and extract contents from URLs, which the user must collect and provide manually. Therefore, they are not able to traverse web pages, collecting links and data automatically. The main difference is that our script “scraper” is able to download all the data, only from a single web-page, while a crawler made the same things from a lot of pages on internet. A typical web spider is the script of google that scrape all the internet domain and save all the web link in a hierarchical list.</p>
+<p>According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used <em>to retrieve and collect data from the web</em>. They browse and download web pages in an automated way. They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.</p>
+<p>A <strong>web spider</strong> is a web crawler and it can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format.</p>
+<p>Our simple scrape script does not provide the same function of crawling, because they can only parse and extract contents from URLs, which the user must collect and provide manually. Therefore, they are not able to traverse web pages, collecting links and data automatically. The <strong>main difference</strong> is that our script “scraper” is able to download all the data, only from a <em>single web-page</em>, while a crawler made the same things from <em>a lot of pages on internet</em>. A typical web spider is the script of <strong>google</strong> that scrape all the internet domain and save all the web link in a hierarchical list.</p>
 </div>
 </div>
 </div>

@@ -98,7 +98,7 @@ dat2 <- tibble(
 dat2
 
 ```
-To show that we obtained the same links using the two different methods, we created a dataset with the two variables created
+To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above
 
 ```{r}
 #Creating a dataset with both variables to check them easily
@@ -201,6 +201,7 @@ link_archivio <- unlist(link_archivio)
 
 
 #### *b) For each link, download the files and sys.sleep() for few seconds*
+#### *c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.*
 
 ```{r, eval = F}
 #Creating a folder where to store all the pages:
@@ -241,22 +242,22 @@ articoli_archivio_2016
 ```
 
 
-#### *c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.*
-
-If a page contains no text we expect the iteration to stop and print an error and then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had so that it can continue from there.
-A way to make the code reproducible is to use the if else condition so that you don't have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.
+**If a page contains no text** we expect the iteration to stop and print an error. Then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had. This way it can continue from there.
+A way to make the code reproducible is to use the *if else condition* so that you don't have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.
 
 
 ## **Point 6**
 
 #### *Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don't do it, just sketch and explain.*
 
-According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used to retrieve and collect data from the web. They browse and download web pages in an automated way.
+According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used *to retrieve and collect data from the web*. They browse and download web pages in an automated way.
 They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.
-A web spider is a web crawler and it  can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format.
+
+A **web spider** is a web crawler and it  can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format.
+
 Our simple scrape script does not provide the same function of  crawling, because they can only parse and extract contents from URLs, which the user must collect and provide manually. Therefore, they are not able to traverse web pages, collecting links and data automatically.
-The main difference is that our script “scraper” is able to download all the data, only from a single web-page, while a crawler made the same things from a lot of pages on internet.
-A typical web spider is the script of google that scrape all the internet domain and save all the web link in a hierarchical list.
+The **main difference** is that our script “scraper” is able to download all the data, only from a *single web-page*, while a crawler made the same things from *a lot of pages on internet*.
+A typical web spider is the script of **google** that scrape all the internet domain and save all the web link in a hierarchical list.
 
 
 
