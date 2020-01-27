@@ -14,7 +14,8 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# **CLASS EXERCISE 2** 
+# **CLASS EXERCISE #2**
+**Spider-Wo-Men: with great power comes great responsibility**
 
 #### SETUP
 ```{r, echo = F}
