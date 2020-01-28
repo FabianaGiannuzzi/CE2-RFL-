@@ -99,7 +99,7 @@ dat2 <- tibble(
 dat2
 
 ```
-To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above
+*To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above*
 
 ```{r, eval=F}
 #Creating a dataset with both variables to check them easily
@@ -113,7 +113,7 @@ dat3
 
 ## **Point 4**
 
-#### *Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page).* 
+#### *here, starting from the initial link we scrape the link to the "prossimo articolo" and then the article "In Svizzera il tragitto casa-ufficio è orario di lavoro"*
 
 ```{r, eval=F}
 #Scraping the link "Prossimo articolo" 
