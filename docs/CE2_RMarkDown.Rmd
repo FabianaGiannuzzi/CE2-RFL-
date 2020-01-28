@@ -131,7 +131,7 @@ nextarticle <- read_html(linkNEXTART) %>%
 nextarticle
 ```
 
-This way, we obtained the **text of the article**: 
+This way, we obtained the *text of the article*: 
 
 ```{r, eval= F}
 nextarticle <- read_html(linkNEXTART) %>% 
@@ -142,17 +142,17 @@ nextarticle
 ```
 
 
-#### *How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use]* 
+#### *here we hypothesized a way to scrape other blog posts* 
 
 To repeat the same process for many links we should use the function **for loop** which allows us to apply the same codes to many pages. To do that we have to follow some passages:
 
- 1. We have to generate an output container, which means *creating a vector* specifying the mode and the length;
+ *1*. We have to generate an output container, which means *creating a vector* specifying the mode and the length;
  
- 2. We have to index the links. There are two ways to achieve this task: the first way consists to index all the links directly while a second and preferable way consists in using simple indices;
+ *2*. We have to index the links. There are two ways to achieve this task: the first way consists to index all the links directly while a second and preferable way consists in using simple indices;
  
- 3. We have then to create a folder in which all the pages can be stored with the function *"dir.create"* and specifying the name that we want to assign to the folder;
+ *3*. We have then to create a folder in which all the pages can be stored with the function *"dir.create"* and specifying the name that we want to assign to the folder;
  
- 4. At this point we can start working with the *loop function*:
+ *4*. At this point we can start working with the *loop function*:
  
      - the first step is specify the index;
      
@@ -166,9 +166,9 @@ To repeat the same process for many links we should use the function **for loop*
 
 ## **Point 5**
 
-#### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
+#### *here we downloaded this link politely http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/, anf then:*
 
-#### *a) For each of the 47 pages, get all the links and place them into a list (or character vector)*
+#### *a) for each of the 47 pages we took the links and put them in a list*
 
 ```{r, eval=F}
 #Browsing the page 
@@ -201,8 +201,8 @@ link_archivio <- unlist(link_archivio)
 ```
 
 
-#### *b) For each link, download the files and sys.sleep() for few seconds*
-#### *c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.*
+#### *b) for each link we downloaded the page waiting for 2 seconds*
+#### *c) for each page we have scrape the text*
 
 ```{r, eval = F}
 #Creating a folder where to store all the pages:
