@@ -14,11 +14,12 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# **CLASS EXERCISE #2**
+# **REPORT CLASS EXERCISE #2**
 **Spider-Wo-Men: with great power comes great responsibility**
 
 #### SETUP
-```{r, echo = F}
+#### *here we called the package setup script*
+```{r, eval = F}
 # Source setup scripts:
 source(here::here("src","00_setup.R"))
 
@@ -28,9 +29,9 @@ here::here("")
 
 ## **Point 1**
 
-#### *Inspect the robot.txt and describe what you can and what you should not do. Pay attention to the allow / disallow statements and the definition of user-agent. What do these lines mean?*
+#### *here we inspected the robots file and commented on it*
 
-```{r}
+```{r, eval=FALSE}
 #Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
 url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
@@ -48,9 +49,9 @@ We obtained:
 
 ## **Point 2**
 
-#### *Check out the following link: http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.*
+#### *here we downloaded this link politely http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/.*
 
-```{r}
+```{r, eval=FALSE}
 
 #Downloading the file
 page <- RCurl::getURL(url, 
@@ -68,9 +69,9 @@ writeLines(page,
 
 ## **Point 3**
 
-#### *Create a data frame with all the HTML links in the page using the XML::getHTMLLinks(). Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).*
+#### *here we have created a dataframe with all the links on the page and selected only those that direct within the same page*
 
-```{r, results = 'hide'}
+```{r, eval=FALSE}
 #Getting all the links
 links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
@@ -100,7 +101,7 @@ dat2
 ```
 To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above
 
-```{r}
+```{r, eval=F}
 #Creating a dataset with both variables to check them easily
 dat3 <- tibble(
   links = filteredlinks,
@@ -114,7 +115,7 @@ dat3
 
 #### *Go back to the initial link and focus on the bottom of the page: "Prossimo articolo" it means following article. Scrape this link and then use it to scrape the article "In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page).* 
 
-```{r, results = 'hide'}
+```{r, eval=F}
 #Scraping the link "Prossimo articolo" 
 linkNEXTART <- read_html (here::here("data/Beppe_grillo_blog.html")) %>% 
   html_nodes (css = ".td-post-next-post a") %>% 
@@ -132,7 +133,7 @@ nextarticle
 
 This way, we obtained the **text of the article**: 
 
-```{r, echo = F}
+```{r, eval= F}
 nextarticle <- read_html(linkNEXTART) %>% 
   html_nodes(css = "p") %>% 
   html_text()
@@ -169,7 +170,7 @@ To repeat the same process for many links we should use the function **for loop*
 
 #### *a) For each of the 47 pages, get all the links and place them into a list (or character vector)*
 
-```{r, results = 'hide'}
+```{r, eval=F}
 #Browsing the page 
 url_2 <- URLencode("https://www.beppegrillo.it/category/archivio/2016/")
 browseURL(url_2)
