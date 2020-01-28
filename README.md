@@ -20,6 +20,6 @@ As usual we followed a tidy-data structure in our project, organizing our work i
 
 Following the tidy data model we made also a **FIGS FOLDER** and an **OUTPUT FOLDER** which are useful to store graphs and tables when running an analysis. This time, though, in order to have them even if they're 'empty' we stored a simple keepgit file in them.
 
-Thw workflow of this project is contained in the Rmarkdown and every step in it is explained with our comments to the code so that it is hopefully easy to reproduce and understand.
+The workflow of this project is contained in the Rmarkdown and every step in it is explained with our comments to the code so that it is hopefully easy to reproduce and understand.
 
 The contributors of this project are: Fabiana Giannuzzi, Riccardo Ruta and Anna Ludovica Vinelli, three students from the University of Milan.
