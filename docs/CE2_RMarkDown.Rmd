@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### SETUP
 #### *here we called the package setup script*
-```{r, eval = F}
+```{r, eval=FALSE}
 # Source setup scripts:
 source(here::here("src","00_setup.R"))
 
@@ -71,7 +71,7 @@ writeLines(page,
 
 #### *here we have created a dataframe with all the links on the page and selected only those that direct within the same page*
 
-```{r, eval=FALSE}
+```{r,eval=FALSE}
 #Getting all the links
 links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
 
@@ -101,7 +101,7 @@ dat2
 ```
 *To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above*
 
-```{r, eval=F}
+```{r, eval=FALSE}
 #Creating a dataset with both variables to check them easily
 dat3 <- tibble(
   links = filteredlinks,
