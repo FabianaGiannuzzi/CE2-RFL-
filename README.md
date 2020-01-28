@@ -20,3 +20,4 @@ Following the tidy data model we made also a **FIGS FOLDER** and an **OUTPUT FOL
 
 Thw workflow of this project is contained in the Rmarkdown and every step in it is explained with our comments to the code so that it is hopefully easy to reproduce and understand.
 
+The contributors of this project are: Fabiana Giannuzzi, Riccardo Ruta and Anna Ludovica Vinelli, three students from the University of Milan.
