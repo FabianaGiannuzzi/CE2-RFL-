@@ -1,0 +1,275 @@
+---
+title: "CE2-RFL"
+author: "Riccardo Ruta, Fabiana Gemma Giannuzzi, Anna Ludovica Vinelli"
+date: "27/1/2020"
+output: 
+  html_document:
+    toc: true
+    theme: spacelab
+    highlight: pygments
+    fig_width: 10
+    fig_height: 8
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# **REPORT CLASS EXERCISE #2**
+**Spider-Wo-Men: with great power comes great responsibility**
+
+#### SETUP
+#### *here we called the package setup script*
+```{r, eval=FALSE}
+# Source setup scripts:
+source(here::here("src","00_setup.R"))
+
+here::here("")
+
+```
+
+## **Point 1**
+
+#### *here we inspected the robots file and commented on it*
+
+```{r, eval=FALSE}
+#Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL
+url <- URLencode("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
+
+#Inspecting the robot.txt to see what we are allowed to scrape. 
+browseURL("http://www.beppegrillo.it/robots.txt")
+```
+
+We obtained:
+
+- *"User-agent: \*".* The user-agent refers to the robots to whom the Disallow and Allow codes apply. In this case the "*" refers to every robot.
+
+- *"Disallow: /wp-admin/"*, which means that every robot is excluded from this specific part of the server.
+
+- *"Allow: /wp-admin/admin-ajax.php"*, which means that every robot is allowed to scrape "admin-ajax.php".
+
+## **Point 2**
+
+#### *here we downloaded this link politely http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/.*
+
+```{r, eval=FALSE}
+
+#Downloading the file
+page <- RCurl::getURL(url, 
+               useragent = str_c(R.version$platform,
+                                 R.version$version.string,
+                                 sep = ", "),
+               httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
+
+
+#Saving the page
+writeLines(page, 
+           con = here::here("/data/Beppe_grillo_blog.html"))
+
+```
+
+## **Point 3**
+
+#### *here we have created a dataframe with all the links on the page and selected only those that direct within the same page*
+
+```{r,eval=FALSE}
+#Getting all the links
+links <- XML::getHTMLLinks("http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/")
+
+#Filtering the links to keep only those from the blog
+filteredlinks <- str_subset(links, "^http://www\\.beppegrillo\\.it")
+
+dat <- tibble(
+  links = filteredlinks)
+
+dat
+
+#Using rvest:: instead of XML.
+
+links2 <- read_html(here::here("data/Beppe_grillo_blog.html")) %>% 
+  html_nodes(css = "a") %>% 
+  html_attr("href")
+
+links2
+
+filteredlinks2 <- str_subset(links2, "^http://www\\.beppegrillo\\.it")
+
+dat2 <- tibble(
+  links2 = filteredlinks2
+)
+dat2
+
+```
+*To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above*
+
+```{r, eval=FALSE}
+#Creating a dataset with both variables to check them easily
+dat3 <- tibble(
+  links = filteredlinks,
+  links2 = filteredlinks2
+)
+dat3
+```
+
+
+## **Point 4**
+
+#### *here, starting from the initial link we scrape the link to the "prossimo articolo" and then the article "In Svizzera il tragitto casa-ufficio è orario di lavoro"*
+
+```{r, eval=F}
+#Scraping the link "Prossimo articolo" 
+linkNEXTART <- read_html (here::here("data/Beppe_grillo_blog.html")) %>% 
+  html_nodes (css = ".td-post-next-post a") %>% 
+  html_attr ("href")
+
+linkNEXTART
+
+#Scraping the article 
+nextarticle <- read_html(linkNEXTART) %>% 
+  html_nodes(css = "p") %>% 
+  html_text()
+
+nextarticle
+```
+
+This way, we obtained the *text of the article*: 
+
+```{r, eval= F}
+nextarticle <- read_html(linkNEXTART) %>% 
+  html_nodes(css = "p") %>% 
+  html_text()
+
+nextarticle
+```
+
+
+#### *here we hypothesized a way to scrape other blog posts* 
+
+To repeat the same process for many links we should use the function **for loop** which allows us to apply the same codes to many pages. To do that we have to follow some passages:
+
+ *1*. We have to generate an output container, which means *creating a vector* specifying the mode and the length;
+ 
+ *2*. We have to index the links. There are two ways to achieve this task: the first way consists to index all the links directly while a second and preferable way consists in using simple indices;
+ 
+ *3*. We have then to create a folder in which all the pages can be stored with the function *"dir.create"* and specifying the name that we want to assign to the folder;
+ 
+ *4*. At this point we can start working with the *loop function*:
+ 
+     - the first step is specify the index;
+     
+     - Then we print the outputs with *cat()*;
+     
+     - Get the page and save it, providing our personal e-mail;
+     
+     - Parse the file and extract want we are interested to; 
+     
+     - Of course, we will use *"sys.sleep(2)"* to make this process less stressful for the program.
+
+## **Point 5**
+
+#### *here we downloaded this link politely http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/, anf then:*
+
+#### *a) for each of the 47 pages we took the links and put them in a list*
+
+```{r, eval=F}
+#Browsing the page 
+url_2 <- URLencode("https://www.beppegrillo.it/category/archivio/2016/")
+browseURL(url_2)
+url_2
+
+#Downloading the page while specifying our browser and providing our email
+page2 <- getURL(url_2, 
+                      useragent = str_c(R.version$platform,
+                                        R.version$version.string,
+                                        sep = ", "),
+                      httpheader = c(From = "riccardo.ruta@studenti.unimi.it")) 
+
+
+#Saving the page 
+writeLines(page2, 
+           con = here::here("data/Beppe_grillo_archivio_2016.html"))
+
+#Creating an object to grab all the links from the 47 pages
+link_archivio <- lapply(paste0("https://www.beppegrillo.it/category/archivio/2016/page/", 1:47),
+                        function(url){
+                          url_2 %>% read_html() %>% 
+                            html_nodes(".td_module_10 .td-module-title a") %>% 
+                            html_attr("href") 
+                        })
+
+link_archivio <- unlist(link_archivio)
+
+```
+
+
+#### *b) for each link we downloaded the page waiting for 2 seconds*
+#### *c) for each page we have scrape the text*
+
+```{r, eval = F}
+#Creating a folder where to store all the pages:
+dir.create("data/archivio_2016")
+
+#Specifying lenght and mode of the vector
+articoli_archivio_2016 <- vector(mode = "list", length = length(link_archivio))
+
+#Applying the for loop function to get all the links and their texts from the 47 pages of the 2016 archivio.
+for (i in 1:length(link_archivio)) {
+  
+  cat("Iteration:", i, ". Scraping:", link_archivio[i],"\n")
+  
+  #Getting the page
+  page3 <- RCurl::getURL(link_archivio[i], 
+                        useragent = str_c(R.version$platform,
+                                          R.version$version.string,
+                                          sep = ", "),
+                        httpheader = c(From = "giannuzzifabianagemma@gmail.com"))
+  
+  #Saving the page:
+  file_path_1 <- here::here("data/archivio_2016", str_c("archivio_", i, ".html"))
+  writeLines(page3, 
+             con = file_path_1)
+  
+  #Parsing and extracting
+  articoli_archivio_2016[[i]] <- read_html(file_path_1) %>% 
+    html_nodes("p") %>% 
+    html_text()
+  
+  #Setting the amount of time in which the code rests.
+  Sys.sleep(2) 
+} 
+
+articoli_archivio_2016
+
+
+```
+
+
+**If a page contains no text** we expect the iteration to stop and print an error. Then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had. This way it can continue from there.
+A way to make the code reproducible is to use the *if else condition* so that you don't have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.
+
+
+## **Point 6**
+
+#### *here to carry out point 6 we have read the documentation on Rcrawl and we have given our own interpretation*
+
+According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used *to retrieve and collect data from the web*. They browse and download web pages in an automated way.
+They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.
+
+A **web spider** is a web crawler and it  can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format.
+
+Our simple scrape script does not provide the same function of crawling, because they can only parse and extract contents from URLs, which the user must collect and provide manually. Therefore, they are not able to traverse web pages, collecting links and data automatically.
+The **main difference** is that our script “scraper” is able to download all the data, only from a *single web-page*, while a crawler made the same things from *a lot of pages on internet*.
+A typical web spider is the script of **google** that scrape all the internet domain and save all the web link in a hierarchical list.
+
+Building a web crawler seems in any case very complex, certainly the large amount of available features makes "Rcrawler" a very versatile and adaptable package to the needs of the situations. From the documentation of the package we find what are the essential components that cannot be missing
+
+HTTP requests Handler: handles HTTP requests.
+
+Link Extractor: parses and extracts links from crawled documents.
+
+Content duplicate checker: detects duplicate and near-duplicate documents.
+
+Work-thread manager: multi-threading and parallel computing handles.
+
+Data extraction: a component for parsing and extracting web page contents.
+
+Index: a data structure to store information regarding crawled web pages.
