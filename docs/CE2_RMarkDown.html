@@ -451,7 +451,7 @@ summary {
 
 <div id="TOC">
 <ul>
-<li><a href="#class-exercise-2"><strong>CLASS EXERCISE #2</strong></a><ul>
+<li><a href="#report-class-exercise-2"><strong>REPORT CLASS EXERCISE #2</strong></a><ul>
 <li><a href="#point-1"><strong>Point 1</strong></a></li>
 <li><a href="#point-2"><strong>Point 2</strong></a></li>
 <li><a href="#point-3"><strong>Point 3</strong></a></li>
@@ -462,12 +462,14 @@ summary {
 </ul>
 </div>
 
-<div id="class-exercise-2" class="section level1">
-<h1><strong>CLASS EXERCISE #2</strong></h1>
+<div id="report-class-exercise-2" class="section level1">
+<h1><strong>REPORT CLASS EXERCISE #2</strong></h1>
 <p><strong>Spider-Wo-Men: with great power comes great responsibility</strong></p>
 <div id="setup" class="section level4">
 <h4>SETUP</h4>
-<p>####here we called the package setup script</p>
+</div>
+<div id="here-we-called-the-package-setup-script" class="section level4">
+<h4><em>here we called the package setup script</em></h4>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Source setup scripts:</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">source</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;src&quot;</span>,<span class="st">&quot;00_setup.R&quot;</span>))</a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
@@ -475,7 +477,8 @@ summary {
 </div>
 <div id="point-1" class="section level2">
 <h2><strong>Point 1</strong></h2>
-<p>####here we inspected the robots file and commented on it</p>
+<div id="here-we-inspected-the-robots-file-and-commented-on-it" class="section level4">
+<h4><em>here we inspected the robots file and commented on it</em></h4>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co">#Storing the url to creare a tidy structure of the file using the URLencode() to avoid potential problems with formatting the URL</span></a>
 <a class="sourceLine" id="cb2-2" title="2">url &lt;-<span class="st"> </span><span class="kw">URLencode</span>(<span class="st">&quot;http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/&quot;</span>)</a>
 <a class="sourceLine" id="cb2-3" title="3"></a>
@@ -488,10 +491,11 @@ summary {
 <li><p><em>“Allow: /wp-admin/admin-ajax.php”</em>, which means that every robot is allowed to scrape “admin-ajax.php”.</p></li>
 </ul>
 </div>
+</div>
 <div id="point-2" class="section level2">
 <h2><strong>Point 2</strong></h2>
-<div id="check-out-the-following-link-httpwww.beppegrillo.itun-mare-di-plastica-ci-sommergera.-download-it-using-rccurlgeturl-to-download-the-page-while-informing-the-webmaster-about-your-browser-details-and-providing-your-email." class="section level4">
-<h4><em>Check out the following link: <a href="http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/" class="uri">http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/</a>. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.</em></h4>
+<div id="here-we-downloaded-this-link-politely-httpwww.beppegrillo.itun-mare-di-plastica-ci-sommergera." class="section level4">
+<h4><em>here we downloaded this link politely <a href="http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/" class="uri">http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/</a>.</em></h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">#Downloading the file</span></a>
 <a class="sourceLine" id="cb3-2" title="2">page &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">getURL</span>(url, </a>
 <a class="sourceLine" id="cb3-3" title="3">               <span class="dt">useragent =</span> <span class="kw">str_c</span>(R.version<span class="op">$</span>platform,</a>
@@ -507,8 +511,8 @@ summary {
 </div>
 <div id="point-3" class="section level2">
 <h2><strong>Point 3</strong></h2>
-<div id="create-a-data-frame-with-all-the-html-links-in-the-page-using-the-xmlgethtmllinks.-then-use-a-regex-to-keep-only-those-links-that-re-direct-to-other-posts-of-the-beppegrillo.it-blog-so-remove-all-other-links." class="section level4">
-<h4><em>Create a data frame with all the HTML links in the page using the XML::getHTMLLinks(). Then, use a regex to keep only those links that re-direct to other posts of the beppegrillo.it blog (so remove all other links).</em></h4>
+<div id="here-we-have-created-a-dataframe-with-all-the-links-on-the-page-and-selected-only-those-that-direct-within-the-same-page" class="section level4">
+<h4><em>here we have created a dataframe with all the links on the page and selected only those that direct within the same page</em></h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">#Getting all the links</span></a>
 <a class="sourceLine" id="cb4-2" title="2">links &lt;-<span class="st"> </span>XML<span class="op">::</span><span class="kw">getHTMLLinks</span>(<span class="st">&quot;http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/&quot;</span>)</a>
 <a class="sourceLine" id="cb4-3" title="3"></a>
@@ -534,7 +538,7 @@ summary {
 <a class="sourceLine" id="cb4-23" title="23">  <span class="dt">links2 =</span> filteredlinks2</a>
 <a class="sourceLine" id="cb4-24" title="24">)</a>
 <a class="sourceLine" id="cb4-25" title="25">dat2</a></code></pre></div>
-<p>To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above</p>
+<p><em>To show that we obtained the same links using the two different methods, we created a dataset with the two variables created above</em></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">#Creating a dataset with both variables to check them easily</span></a>
 <a class="sourceLine" id="cb5-2" title="2">dat3 &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
 <a class="sourceLine" id="cb5-3" title="3">  <span class="dt">links =</span> filteredlinks,</a>
@@ -545,8 +549,8 @@ summary {
 </div>
 <div id="point-4" class="section level2">
 <h2><strong>Point 4</strong></h2>
-<div id="go-back-to-the-initial-link-and-focus-on-the-bottom-of-the-page-prossimo-articolo-it-means-following-article.-scrape-this-link-and-then-use-it-to-scrape-the-article-in-svizzera-il-tragitto-casa-ufficio-è-orario-di-lavoro-i.e.-the-following-page." class="section level4">
-<h4><em>Go back to the initial link and focus on the bottom of the page: “Prossimo articolo” it means following article. Scrape this link and then use it to scrape the article “In Svizzera il tragitto casa-ufficio è orario di lavoro” (i.e. the following page).</em></h4>
+<div id="here-starting-from-the-initial-link-we-scrape-the-link-to-the-prossimo-articolo-and-then-the-article-in-svizzera-il-tragitto-casa-ufficio-è-orario-di-lavoro" class="section level4">
+<h4><em>here, starting from the initial link we scrape the link to the “prossimo articolo” and then the article “In Svizzera il tragitto casa-ufficio è orario di lavoro”</em></h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co">#Scraping the link &quot;Prossimo articolo&quot; </span></a>
 <a class="sourceLine" id="cb6-2" title="2">linkNEXTART &lt;-<span class="st"> </span><span class="kw">read_html</span> (here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data/Beppe_grillo_blog.html&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw">html_nodes</span> (<span class="dt">css =</span> <span class="st">&quot;.td-post-next-post a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -560,110 +564,110 @@ summary {
 <a class="sourceLine" id="cb6-11" title="11"><span class="st">  </span><span class="kw">html_text</span>()</a>
 <a class="sourceLine" id="cb6-12" title="12"></a>
 <a class="sourceLine" id="cb6-13" title="13">nextarticle</a></code></pre></div>
-<p>This way, we obtained the <strong>text of the article</strong>:</p>
+<p>This way, we obtained the <em>text of the article</em>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">nextarticle &lt;-<span class="st"> </span><span class="kw">read_html</span>(linkNEXTART) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;p&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">html_text</span>()</a>
 <a class="sourceLine" id="cb7-4" title="4"></a>
 <a class="sourceLine" id="cb7-5" title="5">nextarticle</a></code></pre></div>
 </div>
-<div id="how-could-you-use-these-previous-and-following-links-to-scrape-many-more-blog-posts-dont-do-it-just-sketch-the-ideas-and-the-r-functions-you-should-use" class="section level4">
-<h4><em>How could you use these previous and following links to scrape many more blog posts? [don’t do it, just sketch the ideas and the R functions you should use]</em></h4>
+<div id="here-we-hypothesized-a-way-to-scrape-other-blog-posts" class="section level4">
+<h4><em>here we hypothesized a way to scrape other blog posts</em></h4>
 <p>To repeat the same process for many links we should use the function <strong>for loop</strong> which allows us to apply the same codes to many pages. To do that we have to follow some passages:</p>
-<ol style="list-style-type: decimal">
-<li><p>We have to generate an output container, which means <em>creating a vector</em> specifying the mode and the length;</p></li>
-<li><p>We have to index the links. There are two ways to achieve this task: the first way consists to index all the links directly while a second and preferable way consists in using simple indices;</p></li>
-<li><p>We have then to create a folder in which all the pages can be stored with the function <em>“dir.create”</em> and specifying the name that we want to assign to the folder;</p></li>
-<li><p>At this point we can start working with the <em>loop function</em>:</p>
-<ul>
-<li><p>the first step is specify the index;</p></li>
-<li><p>Then we print the outputs with <em>cat()</em>;</p></li>
-<li><p>Get the page and save it, providing our personal e-mail;</p></li>
-<li><p>Parse the file and extract want we are interested to;</p></li>
-<li><p>Of course, we will use <em>“sys.sleep(2)”</em> to make this process less stressful for the program.</p></li>
-</ul></li>
-</ol>
+<p><em>1</em>. We have to generate an output container, which means <em>creating a vector</em> specifying the mode and the length;</p>
+<p><em>2</em>. We have to index the links. There are two ways to achieve this task: the first way consists to index all the links directly while a second and preferable way consists in using simple indices;</p>
+<p><em>3</em>. We have then to create a folder in which all the pages can be stored with the function <em>“dir.create”</em> and specifying the name that we want to assign to the folder;</p>
+<p><em>4</em>. At this point we can start working with the <em>loop function</em>:</p>
+<pre><code> - the first step is specify the index;
+ 
+ - Then we print the outputs with *cat()*;
+ 
+ - Get the page and save it, providing our personal e-mail;
+ 
+ - Parse the file and extract want we are interested to; 
+ 
+ - Of course, we will use *&quot;sys.sleep(2)&quot;* to make this process less stressful for the program.</code></pre>
 </div>
 </div>
 <div id="point-5" class="section level2">
 <h2><strong>Point 5</strong></h2>
-<div id="check-out-the-following-link-httpwww.beppegrillo.itun-mare-di-plastica-ci-sommergera.-download-it-using-rccurlgeturl-to-download-the-page-while-informing-the-webmaster-about-your-browser-details-and-providing-your-email.-1" class="section level4">
-<h4><em>Check out the following link: <a href="http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/" class="uri">http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/</a>. Download it using RCcurl::getURL() to download the page while informing the webmaster about your browser details and providing your email.</em></h4>
+<div id="here-we-downloaded-this-link-politely-httpwww.beppegrillo.itun-mare-di-plastica-ci-sommergera-anf-then" class="section level4">
+<h4><em>here we downloaded this link politely <a href="http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/" class="uri">http://www.beppegrillo.it/un-mare-di-plastica-ci-sommergera/</a>, anf then:</em></h4>
 </div>
-<div id="a-for-each-of-the-47-pages-get-all-the-links-and-place-them-into-a-list-or-character-vector" class="section level4">
-<h4><em>a) For each of the 47 pages, get all the links and place them into a list (or character vector)</em></h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co">#Browsing the page </span></a>
-<a class="sourceLine" id="cb8-2" title="2">url_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">URLencode</span>(<span class="st">&quot;https://www.beppegrillo.it/category/archivio/2016/&quot;</span>)</a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="kw">browseURL</span>(url_<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb8-4" title="4">url_<span class="dv">2</span></a>
-<a class="sourceLine" id="cb8-5" title="5"></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#Downloading the page while specifying our browser and providing our email</span></a>
-<a class="sourceLine" id="cb8-7" title="7">page2 &lt;-<span class="st"> </span><span class="kw">getURL</span>(url_<span class="dv">2</span>, </a>
-<a class="sourceLine" id="cb8-8" title="8">                      <span class="dt">useragent =</span> <span class="kw">str_c</span>(R.version<span class="op">$</span>platform,</a>
-<a class="sourceLine" id="cb8-9" title="9">                                        R.version<span class="op">$</span>version.string,</a>
-<a class="sourceLine" id="cb8-10" title="10">                                        <span class="dt">sep =</span> <span class="st">&quot;, &quot;</span>),</a>
-<a class="sourceLine" id="cb8-11" title="11">                      <span class="dt">httpheader =</span> <span class="kw">c</span>(<span class="dt">From =</span> <span class="st">&quot;riccardo.ruta@studenti.unimi.it&quot;</span>)) </a>
-<a class="sourceLine" id="cb8-12" title="12"></a>
-<a class="sourceLine" id="cb8-13" title="13"></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="co">#Saving the page </span></a>
-<a class="sourceLine" id="cb8-15" title="15"><span class="kw">writeLines</span>(page2, </a>
-<a class="sourceLine" id="cb8-16" title="16">           <span class="dt">con =</span> here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data/Beppe_grillo_archivio_2016.html&quot;</span>))</a>
-<a class="sourceLine" id="cb8-17" title="17"></a>
-<a class="sourceLine" id="cb8-18" title="18"><span class="co">#Creating an object to grab all the links from the 47 pages</span></a>
-<a class="sourceLine" id="cb8-19" title="19">link_archivio &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">&quot;https://www.beppegrillo.it/category/archivio/2016/page/&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">47</span>),</a>
-<a class="sourceLine" id="cb8-20" title="20">                        <span class="cf">function</span>(url){</a>
-<a class="sourceLine" id="cb8-21" title="21">                          url_<span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-22" title="22"><span class="st">                            </span><span class="kw">html_nodes</span>(<span class="st">&quot;.td_module_10 .td-module-title a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-23" title="23"><span class="st">                            </span><span class="kw">html_attr</span>(<span class="st">&quot;href&quot;</span>) </a>
-<a class="sourceLine" id="cb8-24" title="24">                        })</a>
-<a class="sourceLine" id="cb8-25" title="25"></a>
-<a class="sourceLine" id="cb8-26" title="26">link_archivio &lt;-<span class="st"> </span><span class="kw">unlist</span>(link_archivio)</a></code></pre></div>
+<div id="a-for-each-of-the-47-pages-we-took-the-links-and-put-them-in-a-list" class="section level4">
+<h4><em>a) for each of the 47 pages we took the links and put them in a list</em></h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co">#Browsing the page </span></a>
+<a class="sourceLine" id="cb9-2" title="2">url_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">URLencode</span>(<span class="st">&quot;https://www.beppegrillo.it/category/archivio/2016/&quot;</span>)</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">browseURL</span>(url_<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb9-4" title="4">url_<span class="dv">2</span></a>
+<a class="sourceLine" id="cb9-5" title="5"></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co">#Downloading the page while specifying our browser and providing our email</span></a>
+<a class="sourceLine" id="cb9-7" title="7">page2 &lt;-<span class="st"> </span><span class="kw">getURL</span>(url_<span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb9-8" title="8">                      <span class="dt">useragent =</span> <span class="kw">str_c</span>(R.version<span class="op">$</span>platform,</a>
+<a class="sourceLine" id="cb9-9" title="9">                                        R.version<span class="op">$</span>version.string,</a>
+<a class="sourceLine" id="cb9-10" title="10">                                        <span class="dt">sep =</span> <span class="st">&quot;, &quot;</span>),</a>
+<a class="sourceLine" id="cb9-11" title="11">                      <span class="dt">httpheader =</span> <span class="kw">c</span>(<span class="dt">From =</span> <span class="st">&quot;riccardo.ruta@studenti.unimi.it&quot;</span>)) </a>
+<a class="sourceLine" id="cb9-12" title="12"></a>
+<a class="sourceLine" id="cb9-13" title="13"></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">#Saving the page </span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="kw">writeLines</span>(page2, </a>
+<a class="sourceLine" id="cb9-16" title="16">           <span class="dt">con =</span> here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data/Beppe_grillo_archivio_2016.html&quot;</span>))</a>
+<a class="sourceLine" id="cb9-17" title="17"></a>
+<a class="sourceLine" id="cb9-18" title="18"><span class="co">#Creating an object to grab all the links from the 47 pages</span></a>
+<a class="sourceLine" id="cb9-19" title="19">link_archivio &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">&quot;https://www.beppegrillo.it/category/archivio/2016/page/&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">47</span>),</a>
+<a class="sourceLine" id="cb9-20" title="20">                        <span class="cf">function</span>(url){</a>
+<a class="sourceLine" id="cb9-21" title="21">                          url_<span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-22" title="22"><span class="st">                            </span><span class="kw">html_nodes</span>(<span class="st">&quot;.td_module_10 .td-module-title a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-23" title="23"><span class="st">                            </span><span class="kw">html_attr</span>(<span class="st">&quot;href&quot;</span>) </a>
+<a class="sourceLine" id="cb9-24" title="24">                        })</a>
+<a class="sourceLine" id="cb9-25" title="25"></a>
+<a class="sourceLine" id="cb9-26" title="26">link_archivio &lt;-<span class="st"> </span><span class="kw">unlist</span>(link_archivio)</a></code></pre></div>
 </div>
-<div id="b-for-each-link-download-the-files-and-sys.sleep-for-few-seconds" class="section level4">
-<h4><em>b) For each link, download the files and sys.sleep() for few seconds</em></h4>
+<div id="b-for-each-link-we-downloaded-the-page-waiting-for-2-seconds" class="section level4">
+<h4><em>b) for each link we downloaded the page waiting for 2 seconds</em></h4>
 </div>
-<div id="c-for-each-downloaded-page-scrape-the-main-text.-ask-yourself-what-happens-if-a-page-contains-no-text." class="section level4">
-<h4><em>c) For each downloaded page, scrape the main text. Ask yourself what happens if a page contains no text.</em></h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co">#Creating a folder where to store all the pages:</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw">dir.create</span>(<span class="st">&quot;data/archivio_2016&quot;</span>)</a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#Specifying lenght and mode of the vector</span></a>
-<a class="sourceLine" id="cb9-5" title="5">articoli_archivio_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(link_archivio))</a>
-<a class="sourceLine" id="cb9-6" title="6"></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#Applying the for loop function to get all the links and their texts from the 47 pages of the 2016 archivio.</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(link_archivio)) {</a>
-<a class="sourceLine" id="cb9-9" title="9">  </a>
-<a class="sourceLine" id="cb9-10" title="10">  <span class="kw">cat</span>(<span class="st">&quot;Iteration:&quot;</span>, i, <span class="st">&quot;. Scraping:&quot;</span>, link_archivio[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb9-11" title="11">  </a>
-<a class="sourceLine" id="cb9-12" title="12">  <span class="co">#Getting the page</span></a>
-<a class="sourceLine" id="cb9-13" title="13">  page3 &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">getURL</span>(link_archivio[i], </a>
-<a class="sourceLine" id="cb9-14" title="14">                        <span class="dt">useragent =</span> <span class="kw">str_c</span>(R.version<span class="op">$</span>platform,</a>
-<a class="sourceLine" id="cb9-15" title="15">                                          R.version<span class="op">$</span>version.string,</a>
-<a class="sourceLine" id="cb9-16" title="16">                                          <span class="dt">sep =</span> <span class="st">&quot;, &quot;</span>),</a>
-<a class="sourceLine" id="cb9-17" title="17">                        <span class="dt">httpheader =</span> <span class="kw">c</span>(<span class="dt">From =</span> <span class="st">&quot;giannuzzifabianagemma@gmail.com&quot;</span>))</a>
-<a class="sourceLine" id="cb9-18" title="18">  </a>
-<a class="sourceLine" id="cb9-19" title="19">  <span class="co">#Saving the page:</span></a>
-<a class="sourceLine" id="cb9-20" title="20">  file_path_<span class="dv">1</span> &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data/archivio_2016&quot;</span>, <span class="kw">str_c</span>(<span class="st">&quot;archivio_&quot;</span>, i, <span class="st">&quot;.html&quot;</span>))</a>
-<a class="sourceLine" id="cb9-21" title="21">  <span class="kw">writeLines</span>(page3, </a>
-<a class="sourceLine" id="cb9-22" title="22">             <span class="dt">con =</span> file_path_<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb9-23" title="23">  </a>
-<a class="sourceLine" id="cb9-24" title="24">  <span class="co">#Parsing and extracting</span></a>
-<a class="sourceLine" id="cb9-25" title="25">  articoli_archivio_<span class="dv">2016</span>[[i]] &lt;-<span class="st"> </span><span class="kw">read_html</span>(file_path_<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-26" title="26"><span class="st">    </span><span class="kw">html_nodes</span>(<span class="st">&quot;p&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-27" title="27"><span class="st">    </span><span class="kw">html_text</span>()</a>
-<a class="sourceLine" id="cb9-28" title="28">  </a>
-<a class="sourceLine" id="cb9-29" title="29">  <span class="co">#Setting the amount of time in which the code rests.</span></a>
-<a class="sourceLine" id="cb9-30" title="30">  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>) </a>
-<a class="sourceLine" id="cb9-31" title="31">} </a>
-<a class="sourceLine" id="cb9-32" title="32"></a>
-<a class="sourceLine" id="cb9-33" title="33">articoli_archivio_<span class="dv">2016</span></a></code></pre></div>
+<div id="c-for-each-page-we-have-scrape-the-text" class="section level4">
+<h4><em>c) for each page we have scrape the text</em></h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">#Creating a folder where to store all the pages:</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">dir.create</span>(<span class="st">&quot;data/archivio_2016&quot;</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co">#Specifying lenght and mode of the vector</span></a>
+<a class="sourceLine" id="cb10-5" title="5">articoli_archivio_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;list&quot;</span>, <span class="dt">length =</span> <span class="kw">length</span>(link_archivio))</a>
+<a class="sourceLine" id="cb10-6" title="6"></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#Applying the for loop function to get all the links and their texts from the 47 pages of the 2016 archivio.</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(link_archivio)) {</a>
+<a class="sourceLine" id="cb10-9" title="9">  </a>
+<a class="sourceLine" id="cb10-10" title="10">  <span class="kw">cat</span>(<span class="st">&quot;Iteration:&quot;</span>, i, <span class="st">&quot;. Scraping:&quot;</span>, link_archivio[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb10-11" title="11">  </a>
+<a class="sourceLine" id="cb10-12" title="12">  <span class="co">#Getting the page</span></a>
+<a class="sourceLine" id="cb10-13" title="13">  page3 &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">getURL</span>(link_archivio[i], </a>
+<a class="sourceLine" id="cb10-14" title="14">                        <span class="dt">useragent =</span> <span class="kw">str_c</span>(R.version<span class="op">$</span>platform,</a>
+<a class="sourceLine" id="cb10-15" title="15">                                          R.version<span class="op">$</span>version.string,</a>
+<a class="sourceLine" id="cb10-16" title="16">                                          <span class="dt">sep =</span> <span class="st">&quot;, &quot;</span>),</a>
+<a class="sourceLine" id="cb10-17" title="17">                        <span class="dt">httpheader =</span> <span class="kw">c</span>(<span class="dt">From =</span> <span class="st">&quot;giannuzzifabianagemma@gmail.com&quot;</span>))</a>
+<a class="sourceLine" id="cb10-18" title="18">  </a>
+<a class="sourceLine" id="cb10-19" title="19">  <span class="co">#Saving the page:</span></a>
+<a class="sourceLine" id="cb10-20" title="20">  file_path_<span class="dv">1</span> &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data/archivio_2016&quot;</span>, <span class="kw">str_c</span>(<span class="st">&quot;archivio_&quot;</span>, i, <span class="st">&quot;.html&quot;</span>))</a>
+<a class="sourceLine" id="cb10-21" title="21">  <span class="kw">writeLines</span>(page3, </a>
+<a class="sourceLine" id="cb10-22" title="22">             <span class="dt">con =</span> file_path_<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-23" title="23">  </a>
+<a class="sourceLine" id="cb10-24" title="24">  <span class="co">#Parsing and extracting</span></a>
+<a class="sourceLine" id="cb10-25" title="25">  articoli_archivio_<span class="dv">2016</span>[[i]] &lt;-<span class="st"> </span><span class="kw">read_html</span>(file_path_<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-26" title="26"><span class="st">    </span><span class="kw">html_nodes</span>(<span class="st">&quot;p&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-27" title="27"><span class="st">    </span><span class="kw">html_text</span>()</a>
+<a class="sourceLine" id="cb10-28" title="28">  </a>
+<a class="sourceLine" id="cb10-29" title="29">  <span class="co">#Setting the amount of time in which the code rests.</span></a>
+<a class="sourceLine" id="cb10-30" title="30">  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb10-31" title="31">} </a>
+<a class="sourceLine" id="cb10-32" title="32"></a>
+<a class="sourceLine" id="cb10-33" title="33">articoli_archivio_<span class="dv">2016</span></a></code></pre></div>
 <p><strong>If a page contains no text</strong> we expect the iteration to stop and print an error. Then we would delete the link with no text in it and start again from there substituing the 1 with the position the empty link had. This way it can continue from there. A way to make the code reproducible is to use the <em>if else condition</em> so that you don’t have to do it manually. In fact, when you use this function R automatically reacts to the error by skipping the empty page.</p>
 </div>
 </div>
 <div id="point-6" class="section level2">
 <h2><strong>Point 6</strong></h2>
-<div id="check-out-the-rcrawler-package-and-its-accompanying-paper.-what-does-it-mean-to-crawl-and-what-is-it-a-web-spider-how-is-this-different-from-a-scraper-you-have-built-at-point-5-inspect-the-package-documentation-and-sketch-how-you-could-build-a-spider-scraper-which-functions-should-you-use-with-which-arguments-dont-do-it-just-sketch-and-explain." class="section level4">
-<h4><em>Check out the RCrawler package and its accompanying paper. What does it mean to “ crawl” ? and what is it a “web spider” ? How is this different from a scraper you have built at point 5? Inspect the package documentation and sketch how you could build a spider scraper: which function(s) should you use? With which arguments? Don’t do it, just sketch and explain.</em></h4>
+<div id="here-to-carry-out-point-6-we-have-read-the-documentation-on-rcrawl-and-we-have-given-our-own-interpretation" class="section level4">
+<h4><em>here to carry out point 6 we have read the documentation on Rcrawl and we have given our own interpretation</em></h4>
 <p>According to Salim Khalil and Mohamed Fakir, Web crawlers are programs used <em>to retrieve and collect data from the web</em>. They browse and download web pages in an automated way. They differ according to the content of the pages they crawl: universal crawlers crawl all the web pages, preferential ones have a specific focus.</p>
 <p>A <strong>web spider</strong> is a web crawler and it can read, parse and download a large amount of data on the internet. A web spider use some pre-selected criteria to search information on all the available source on internet, inspect the robots.txt file and automatically download data in a readable format.</p>
 <p>Our simple scrape script does not provide the same function of crawling, because they can only parse and extract contents from URLs, which the user must collect and provide manually. Therefore, they are not able to traverse web pages, collecting links and data automatically. The <strong>main difference</strong> is that our script “scraper” is able to download all the data, only from a <em>single web-page</em>, while a crawler made the same things from <em>a lot of pages on internet</em>. A typical web spider is the script of <strong>google</strong> that scrape all the internet domain and save all the web link in a hierarchical list.</p>
